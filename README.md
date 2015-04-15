@@ -33,10 +33,15 @@ npm install --save-dev mocha-test-container-support
 To get container support for all tests just add a test file to the test root containing the following:
 
 ```js
-require('mocha-test-container-support/lib/MochaTestContainer')();
+var TestContainer = require('mocha-test-container-support');
+var testContentContainer;
+
+beforeEach(function() {
+  testContentContainer = TestContainer.get(this);
+});
 ```
 
-The global `beforeEach()` hook will create a html container structure for the test.
+The created test container will have this structure:
 
 ```html
 <div class="test-container passed" id="254">
@@ -52,12 +57,12 @@ The global `beforeEach()` hook will create a html container structure for the te
 </div>
 ```
 
-The container can be accessed over the Mocha `currentTest` property. That's how custom test related DOM content should be added to the container.
+The `get()` function returns an instance of the test content container. That's where custom test related DOM content should be added.
 
 ```js
-var container = this.currentTest.__test_container_support__.testContentContainer;
+var testContentContainer = TestContainer.get(this);
 
-container.appendChild(yourDomContent);
+testContentContainer.appendChild(yourDomContent);
 ```
 
 
@@ -68,4 +73,6 @@ MIT
 
 ## History
 
+* v0.0.2 - Changed API
+ * Need to explicit call TestContainer.get(this) to create a container for the test
 * v0.0.1 - Initial release, test container

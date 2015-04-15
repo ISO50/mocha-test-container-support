@@ -1,4 +1,4 @@
-window.MochaTestContainer();
+var TestContainer = window.MochaTestContainer;
 
 /* global describe, it, beforeEach, expect */
 /* jshint expr:true */
@@ -6,7 +6,7 @@ window.MochaTestContainer();
 var containerDef;
 
 beforeEach(function() {
-  containerDef = this.currentTest.__test_container_support__;
+  containerDef = TestContainer.getContainerDefinition(this);
 });
 
 describe('mocha-test-container-support', function() {

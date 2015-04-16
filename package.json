@@ -1,6 +1,6 @@
 {
   "name": "mocha-test-container-support",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "An extension for Mocha that provides test container support.",
   "author": "Joerg Dotzki",
   "license": "MIT",

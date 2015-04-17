@@ -73,7 +73,7 @@ MIT
 
 ## History
 
-* v0.0.2 - Changed API
- * Need to explicit call TestContainer.get(this) to create a container for the test
- * Use links based on test name
+* v0.1.0 - Changed API
+  * Need to explicit call TestContainer.get(this) to create a container for the test
+  * Use links based on test name
 * v0.0.1 - Initial release, test container

@@ -7,7 +7,7 @@ The plugin is inspired by [jasmine-test-container-support](https://github.com/bp
 
 ## Install
 
-```bash  
+```bash
 npm install --save-dev mocha-test-container-support
 ```
 
@@ -73,6 +73,7 @@ MIT
 
 ## History
 
+* v0.2.0 - Core Refactoring, bug fixes
 * v0.1.0 - Changed API
   * Need to explicit call TestContainer.get(this) to create a container for the test
   * Use links based on test name

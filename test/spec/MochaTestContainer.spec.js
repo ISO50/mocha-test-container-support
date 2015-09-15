@@ -3,47 +3,80 @@ var TestContainer = window.MochaTestContainer;
 /* global describe, it, beforeEach, expect */
 /* jshint expr:true */
 
-var containerDef;
-
-beforeEach(function() {
-  containerDef = TestContainer.getContainerDefinition(this);
-});
-
 describe('mocha-test-container-support', function() {
 
-  describe('#container', function() {
 
-    it('should be defined', function() {
+  describe('definition', function() {
 
-      expect(containerDef._container).to.be.defined;
+    var container,
+        containerDefinition;
+
+    beforeEach(function() {
+      container = TestContainer.get(this);
+      containerDefinition = TestContainer.getDefinition(this);
     });
+
+
+    it('should configure', function() {
+
+      // when
+      var localContainer = TestContainer.get(this);
+
+      // then
+      expect(localContainer).to.exist;
+      expect(localContainer).to.equal(container);
+
+      expect(localContainer).to.equal(containerDefinition._contentElement);
+    });
+
   });
 
-  describe('#test-content-container', function() {
 
-    it('should be defined', function() {
+  this.timeout(200000);
 
-      expect(containerDef.testContentContainer).to.be.defined;
+
+  describe('on test level', function() {
+
+    var container;
+
+    beforeEach(function() {
+      container = TestContainer.get(this);
+
+      // expect initially empty
+      expect(container.innerHTML).to.eql('');
     });
 
-    it('should be empty', function() {
 
-      expect(containerDef.testContentContainer.childNodes.length).to.equal(0);
-    });
+    it('should populate in test', function() {
 
-    it('should contain childs', function() {
+      var localContainer = TestContainer.get(this);
 
       // given
       var element1 = document.createElement('div');
       var element2 = document.createElement('div');
 
       // when
-      containerDef.testContentContainer.appendChild(element1);
-      containerDef.testContentContainer.appendChild(element2);
+      localContainer.appendChild(element1);
+      localContainer.appendChild(element2);
+    });
+
+
+    afterEach(function() {
+
+      var localContainer = TestContainer.get(this);
 
       // then
-      expect(containerDef.testContentContainer.childNodes.length).to.equal(2);
-      expect(containerDef.testContentContainer.children[1]).to.equal(element2);
+      expect(localContainer).to.equal(container);
+
+      expect(localContainer.innerHTML).to.equal('<div></div><div></div>');
     });
+
   });
+
+
+
+  describe('on suite level', function() {
+
+  });
+
 });
